@@ -3,7 +3,7 @@ package ttb;
 /**
  * 対戦中の文字の表や単語のリストを管理するクラスの抽象クラスです。
  * 
- * @author Kohara
+ * @author Kunishige
  */
 public abstract class Data {
 	

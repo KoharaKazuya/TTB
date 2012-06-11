@@ -10,11 +10,22 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import ttb.GameStatePlayMatch;
 
+/**
+ * ゲームを実行するためのクラス。
+ * クライアント側の対戦中のゲームを進行するプログラム。
+ * 
+ * @author Kohara
+ */
 public class GameStatePlayMatchClient extends GameStatePlayMatch {
 	
+	/** 動作確認用のテキストフィールド */
 	protected TextField textField;
+	/** キーボードからの単語入力 */
 	protected InputWord input;
+	/** プレイヤーオブジェクト */
 	protected PlayerClient me, you;
+	/** GUI */
+	protected GuiPlayMatch gui;
 
 	public GameStatePlayMatchClient(int stateID) {
 		super(stateID);
@@ -24,14 +35,18 @@ public class GameStatePlayMatchClient extends GameStatePlayMatch {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		
-		// フォントの用意
-		// TODO : 処理の軽さからスプライトが用意でき次第、SpriteSheetFontに置き換え
-		java.awt.Font awtFont = new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 24);
-		Font font = new TrueTypeFont(awtFont, true);
-		
-		// テキスト表示領域の用意
-		textField = new TextField(container, font, 10, 10, 100, 100);
-		textField.setFocus(false);
+		/* ### 動作確認テスト用 ### */
+		if ( true ) {
+			// フォントの用意
+			// TODO : 処理の軽さからスプライトが用意でき次第、SpriteSheetFontに置き換え
+			java.awt.Font awtFont = new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 24);
+			Font font = new TrueTypeFont(awtFont, true);
+
+			// テキスト表示領域の用意
+			textField = new TextField(container, font, 10, 10, 100, 100);
+			textField.setFocus(false);
+		}
+		/* ### ### */
 		
 		// プレイヤーの準備
 		me = new PlayerClient();
@@ -43,13 +58,13 @@ public class GameStatePlayMatchClient extends GameStatePlayMatch {
 		input.setInputListener(me);
 		
 		// GUIの用意
-//		gui = new PlayMatchGui();
+		gui = new GuiPlayMatch();
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
-//		gui.render(container, g);
+		gui.render(container, g);
 		textField.render(container, g);
 	}
 
