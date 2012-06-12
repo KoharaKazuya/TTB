@@ -1,4 +1,4 @@
-package ttb.server;
+package ttb;
 
 /**
  * ゲーム内ルールを定める抽象クラス。

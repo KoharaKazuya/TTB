@@ -1,7 +1,5 @@
 package ttb;
 
-import ttb.client.GameStatePlayMatchClient;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -20,7 +18,7 @@ public class Game extends StateBasedGame {
 	public Game() {
 		super("Table Typing Battle");
 		
-		addState( new GameStatePlayMatchClient(PLAY_MATCH_STATE_ID) );
+		addState( new GameStatePlayMatch(PLAY_MATCH_STATE_ID) );
 		
 		enterState(PLAY_MATCH_STATE_ID);
 	}

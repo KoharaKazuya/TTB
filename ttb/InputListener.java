@@ -1,4 +1,4 @@
-package ttb.client;
+package ttb;
 
 /**
  * キーボード入力などの入力イベントを受け付けるインターフェース。

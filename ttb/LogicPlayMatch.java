@@ -1,4 +1,5 @@
-package ttb.server;
+package ttb;
+
 
 /**
  * 対戦中のルールを定めます。
@@ -7,16 +8,16 @@ package ttb.server;
  */
 public class LogicPlayMatch extends Logic {
 	
-	protected PlayerServer[] players;
+	protected Unit[] players;
 	
 	/**
 	 * コンストラクタ
 	 * @param p1 プレイヤー1
 	 * @param p2 プレイヤー2
 	 */
-	public LogicPlayMatch(PlayerServer p1, PlayerServer p2) {
-		players = new PlayerServer[2];
-		players[1] = p1; players[2] = p2;
+	public LogicPlayMatch(Player p1, Opponent p2) {
+		players = new Unit[2];
+		players[0] = p1; players[1] = p2;
 		start();
 	}
 
@@ -69,7 +70,7 @@ public class LogicPlayMatch extends Logic {
 	 * 全てのプレイヤーが終了したか？
 	 */
 	private boolean haveAllPlayerFinished() {
-		for ( PlayerServer p : players ) {
+		for ( Unit p : players ) {
 			if ( !p.hasFinished() ) {
 				return false;
 			}

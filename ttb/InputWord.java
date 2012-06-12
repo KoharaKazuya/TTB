@@ -1,4 +1,4 @@
-package ttb.client;
+package ttb;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
