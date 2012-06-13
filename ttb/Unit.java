@@ -9,6 +9,8 @@ public abstract class Unit {
 	
 	/** 現在入力中の文字列 */
 	protected String currentText = "";
+	/** 自フィールドの表オブジェクト */
+	protected Table table = new Table(4, 4);
 	
 	/**
 	 * 得点を取得します。

@@ -15,8 +15,9 @@ public class Player extends Unit implements InputListener {
 
 	@Override
 	public void stringInputed(String s) {
-		// TODO Auto-generated method stub
-		
+		if ( table.obtainWord(s) ) {
+			System.out.println("you got '" + s + "'!");
+		}
 	}
 
 }
