@@ -65,6 +65,9 @@ public class GameStatePlayMatch extends BasicGameState {
 		
 		// GUIの用意
 		gui = new GuiPlayMatch();
+		
+		// ゲームスタート
+		logic.start();
 	}
 
 	@Override

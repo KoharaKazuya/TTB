@@ -18,7 +18,6 @@ public class LogicPlayMatch extends Logic {
 	public LogicPlayMatch(Player p1, Opponent p2) {
 		players = new Unit[2];
 		players[0] = p1; players[1] = p2;
-		start();
 	}
 
 	@Override
@@ -32,7 +31,10 @@ public class LogicPlayMatch extends Logic {
 	/**
 	 * ‘Îí‚ÌŠJn
 	 */
-	protected void start() {
+	public void start() {
+		for ( Unit p : players ) {
+			p.generateTable();
+		}
 	}
 	
 	/**
