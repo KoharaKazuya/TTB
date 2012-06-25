@@ -24,8 +24,7 @@ public abstract class Unit {
 	 * ‚ ‚ç‚ä‚és“®‚ğ‚â‚è‚Â‚­‚µ‚½‚©H
 	 */
 	public boolean hasFinished() {
-		// TODO
-		return false;
+		return table.getNumOfObtainableWords() == 0;
 	}
 	
 	/**

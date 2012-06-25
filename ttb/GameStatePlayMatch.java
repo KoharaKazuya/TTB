@@ -26,6 +26,8 @@ public class GameStatePlayMatch extends BasicGameState {
 	protected Player player;
 	/** 敵プレイヤーオブジェクト */
 	protected Opponent opponent;
+	/** ゲームロジックオブジェクト */
+	protected LogicPlayMatch logic;
 	/** GUI */
 	protected GuiPlayMatch gui;
 
@@ -37,7 +39,7 @@ public class GameStatePlayMatch extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		
-		/* ### 動作確認テスト用 ### */
+		// テスト用 : TODO
 		if ( true ) {
 			// フォントの用意
 			// TODO : 処理の軽さからスプライトが用意でき次第、SpriteSheetFontに置き換え
@@ -48,11 +50,13 @@ public class GameStatePlayMatch extends BasicGameState {
 			textField = new TextField(container, font, 10, 10, 100, 100);
 			textField.setFocus(false);
 		}
-		/* ### ### */
 		
 		// プレイヤーの準備
 		player = new Player();
 		opponent = new Opponent();
+		
+		// ゲームロジックの用意
+		logic = new LogicPlayMatch(player, opponent);
 
 		// 入力処理の用意
 		input = new InputWord();
@@ -73,6 +77,7 @@ public class GameStatePlayMatch extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
+		logic.update();
 		textField.setText(input.getText());
 	}
 	

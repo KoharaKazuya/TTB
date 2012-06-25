@@ -50,6 +50,11 @@ public class LogicPlayMatch extends Logic {
 			return -1;
 		}
 		
+		// テスト用 : TODO
+		if ( true ) {
+			System.out.println("game!");
+		}
+		
 		int winner = -1;
 		int scoreOfWinner = Integer.MIN_VALUE;
 		for ( int i=0; i<players.length; ++i ) {

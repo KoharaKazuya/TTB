@@ -24,11 +24,6 @@ public class Table {
 		letters = new char[rows*columns];
 		wordList = new ArrayList<Word>();
 		obtainedList = new ArrayList<Word>();
-		
-		// ### テスト用 ###
-		if ( true ) {
-			addObtainableWord( new Word("test", 0, 0, 0) );
-		}
 	}
 	
 	/**
@@ -83,5 +78,12 @@ public class Table {
 	 */
 	protected void rewriteLetters(Word word) {
 		// TODO
+	}
+	
+	/**
+	 * 残りの獲得可能な単語の数
+	 */
+	public int getNumOfObtainableWords() {
+		return wordList.size();
 	}
 }
