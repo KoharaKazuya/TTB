@@ -4,7 +4,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.gui.GUIContext;
 
 /**
- * 対戦中の GUI を提供するクラス。
+ * 対戦中の GUI を提供するクラスです。
  * 
  * @author Hirabara
  */
