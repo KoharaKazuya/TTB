@@ -77,7 +77,22 @@ public class Table {
 	 * 与えた単語に対応する位置の文字列を書き換える
 	 */
 	protected void rewriteLetters(Word word) {
-		// TODO
+		int dx=0, dy=0;
+		// 方向の取得
+		switch ( word.getOrient() ) {
+		case Word.ORIENT_RIGHT:
+			dx = 1;
+			break;
+		case Word.ORIENT_DOWN:
+			dy = 1;
+			break;
+		}
+		// 文字の書き換え
+		for ( char c : word.getString().toCharArray() ) {
+			int x = word.getX() + dx++;
+			int y = word.getY() + dy++;
+			letters[x+y*columns] = c;
+		}
 	}
 	
 	/**
@@ -85,5 +100,13 @@ public class Table {
 	 */
 	public int getNumOfObtainableWords() {
 		return wordList.size();
+	}
+	
+	/**
+	 * 表を文字の一次元配列にして返します。
+	 * 並びは左上から横に。
+	 */
+	public char[] getLetters() {
+		return letters;
 	}
 }

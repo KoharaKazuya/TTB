@@ -14,6 +14,9 @@ public class Word {
 	/** ’PŒê‚ð•\‚·•¶Žš—ñ */
 	private String str;
 	
+	public static final int ORIENT_RIGHT = 1;
+	public static final int ORIENT_DOWN  = 2;
+	
 	public Word(String str, int x, int y, int orient) {
 		this.str = str;
 		this.x = x;
