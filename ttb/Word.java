@@ -71,7 +71,36 @@ public class Word {
 	 * 単語が位置的に重なるかどうか
 	 */
 	public boolean conflictWith(Word other) {
-		// TODO
+		int tdx, tdy, odx, ody;
+		tdx = tdy = odx = ody = 0;
+		
+		switch ( this.getOrient() ) {
+		case ORIENT_RIGHT: tdx = 1; break;
+		case ORIENT_DOWN: tdy = 1; break;
+		}
+		switch ( other.getOrient() ) {
+		case ORIENT_RIGHT: odx = 1; break;
+		case ORIENT_DOWN: ody = 1; break;
+		}
+		
+		int tx = this.getX(), ty = this.getY();
+		for ( int i=0; i<this.getLength(); ++i ) {
+			int ox = other.getX(), oy = other.getY();
+			for ( int j=0; j<other.getLength(); ++j ) {
+				if ( tx == ox && ty == oy ) {
+					return true;
+				}
+				ox += odx; oy += ody;
+			}
+			tx += tdx; ty += tdy;
+		}
 		return false;
+	}
+	
+	/**
+	 * 文字の長さを取得する
+	 */
+	public int getLength() {
+		return str.toCharArray().length;
 	}
 }
