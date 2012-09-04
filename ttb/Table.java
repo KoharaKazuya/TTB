@@ -109,4 +109,24 @@ public class Table {
 	public char[] getLetters() {
 		return letters;
 	}
+
+	@Override
+	/**
+	 * •\‚ğ•¶š—ñ•\Œ»‚Å•Ô‚µ‚Ü‚·B
+	 */
+	public String toString() {
+		String clrl = System.getProperty("line.separator");
+		String str = "";
+		
+		str += super.toString();
+		for ( int row=0; row<rows; ++row ) {
+			String line = "";
+			for ( int col=0; col<columns; ++col ) {
+				line += getLetters()[row*columns + col];
+			}
+			str += clrl + line;
+		}
+		
+		return str;
+	}
 }
