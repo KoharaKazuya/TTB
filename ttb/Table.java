@@ -88,10 +88,11 @@ public class Table {
 			break;
 		}
 		// •¶š‚Ì‘‚«Š·‚¦
+		int x = word.getX();
+		int y = word.getY();
 		for ( char c : word.getString().toCharArray() ) {
-			int x = word.getX() + dx++;
-			int y = word.getY() + dy++;
 			letters[x+y*columns] = c;
+			x += dx; y += dy;
 		}
 	}
 	

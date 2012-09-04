@@ -41,7 +41,7 @@ public abstract class Unit {
 		// テスト用 : TODO
 		if ( true ) {
 			table = new Table(4, 4);
-			table.addObtainableWord( new Word("test", 0, 0, 0) );
+			table.addObtainableWord( new Word("test", 0, 0, Word.ORIENT_DOWN) );
 		}
 	}
 }
