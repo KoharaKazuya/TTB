@@ -7,17 +7,19 @@ package ttb;
  */
 public class Word {
 	
+	/** 向き */
+	public enum Orient {
+		RIGHT, DOWN,
+	}
+	
 	/** 座標 */
 	private int x, y;
 	/** 向き */
-	private int orient;
+	private Orient orient;
 	/** 単語を表す文字列 */
 	private String str;
 	
-	public static final int ORIENT_RIGHT = 1;
-	public static final int ORIENT_DOWN  = 2;
-	
-	public Word(String str, int x, int y, int orient) {
+	public Word(String str, int x, int y, Orient orient) {
 		this.str = str;
 		this.x = x;
 		this.y = y;
@@ -41,7 +43,7 @@ public class Word {
 	/**
 	 * 向きを返します。
 	 */
-	public int getOrient() {
+	public Orient getOrient() {
 		return orient;
 	}
 	
@@ -75,12 +77,12 @@ public class Word {
 		tdx = tdy = odx = ody = 0;
 		
 		switch ( this.getOrient() ) {
-		case ORIENT_RIGHT: tdx = 1; break;
-		case ORIENT_DOWN: tdy = 1; break;
+		case RIGHT: tdx = 1; break;
+		case DOWN: tdy = 1; break;
 		}
 		switch ( other.getOrient() ) {
-		case ORIENT_RIGHT: odx = 1; break;
-		case ORIENT_DOWN: ody = 1; break;
+		case RIGHT: odx = 1; break;
+		case DOWN: ody = 1; break;
 		}
 		
 		int tx = this.getX(), ty = this.getY();

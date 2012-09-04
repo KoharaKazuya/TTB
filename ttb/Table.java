@@ -80,12 +80,8 @@ public class Table {
 		int dx=0, dy=0;
 		// •ûŒü‚Ìæ“¾
 		switch ( word.getOrient() ) {
-		case Word.ORIENT_RIGHT:
-			dx = 1;
-			break;
-		case Word.ORIENT_DOWN:
-			dy = 1;
-			break;
+		case RIGHT: dx = 1; break;
+		case DOWN: dy = 1; break;
 		}
 		// •¶š‚Ì‘‚«Š·‚¦
 		int x = word.getX();
