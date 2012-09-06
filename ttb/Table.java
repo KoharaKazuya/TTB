@@ -1,6 +1,7 @@
 package ttb;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 文字列の表を一つのオブジェクトとして管理するためのクラス。
@@ -59,16 +60,14 @@ public class Table {
 	 */
 	public boolean obtainWord(String wordStr) {
 		boolean ret = false;
-		ArrayList<Word> removeList = new ArrayList<Word>();
-		for ( Word w : wordList ) {
+		Iterator<Word> ite = wordList.iterator();
+		while ( ite.hasNext() ) {
+			Word w = (Word)ite.next();
 			if ( w.getString().equals(wordStr) ) {
-				removeList.add(w);
-				obtainedList.add(w);
 				ret = true;
+				obtainedList.add(w);
+				ite.remove();
 			}
-		}
-		for ( Word w : removeList ) {
-			wordList.remove(w);
 		}
 		return ret;
 	}
