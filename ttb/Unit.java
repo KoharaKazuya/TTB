@@ -16,8 +16,7 @@ public abstract class Unit {
 	 * “¾“_‚ğæ“¾‚µ‚Ü‚·B
 	 */
 	public int getScore() {
-		// TODO
-		return 0;
+		return -table.getNumOfObtainableWords();
 	}
 	
 	/**
