@@ -28,6 +28,8 @@ public class GameStatePlayMatch extends BasicGameState {
 	protected Opponent opponent;
 	/** ゲームロジックオブジェクト */
 	protected LogicPlayMatch logic;
+	/** ネットワーク管理オブジェクト */
+	protected Network network;
 	/** GUI */
 	protected GuiPlayMatch gui;
 
@@ -57,6 +59,10 @@ public class GameStatePlayMatch extends BasicGameState {
 		
 		// ゲームロジックの用意
 		logic = new LogicPlayMatch(player, opponent);
+		
+		// ネットワーク管理オブジェクトの用意
+		network = new Network();
+		network.addInputListener(opponent);
 
 		// 入力処理の用意
 		input = new InputWord();
