@@ -5,7 +5,7 @@ package ttb;
  * 
  * @author Kohara
  */
-public abstract class Unit {
+public abstract class Unit implements InputListener {
 	
 	/** Œ»İ“ü—Í’†‚Ì•¶š—ñ */
 	protected String currentText = "";
@@ -41,6 +41,19 @@ public abstract class Unit {
 		if ( true ) {
 			table = new Table(4, 4);
 			table.addObtainableWord( new Word("test", 0, 0, Word.Orient.DOWN) );
+		}
+	}
+
+	@Override
+	public void textChanged(String text) {
+		currentText = text;
+	}
+
+	@Override
+	public void stringInputed(String s) {
+		if ( table.obtainWord(s) ) {
+			System.out.println(table);
+			System.out.println("you got '" + s + "'!");
 		}
 	}
 }
