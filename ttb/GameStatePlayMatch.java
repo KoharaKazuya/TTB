@@ -70,7 +70,7 @@ public class GameStatePlayMatch extends BasicGameState {
 		input.setInputListener(player);
 		
 		// GUIの用意
-		gui = new GuiPlayMatch();
+		gui = new GuiPlayMatch(new Unit[] { player, opponent });
 		
 		// ゲームスタート
 		logic.start();

@@ -9,6 +9,13 @@ import org.newdawn.slick.gui.GUIContext;
  * @author Hirabara
  */
 public class GuiPlayMatch extends Gui {
+	
+	/** ゲームに参加しているプレイヤー */
+	private Unit[] players;
+	
+	public GuiPlayMatch(Unit[] players) {
+		this.players = players;
+	}
 
 	@Override
 	public void render(GUIContext container, Graphics g) {
