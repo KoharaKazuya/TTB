@@ -18,9 +18,12 @@ public class Word {
 	private Orient orient;
 	/** 単語を表す文字列 */
 	private String str;
+	/**日本語訳*/
+	private String jastr;
 	
-	public Word(String str, int x, int y, Orient orient) {
+	public Word(String str, String jastr, int x, int y, Orient orient) {
 		this.str = str;
+		this.jastr = jastr;
 		this.x = x;
 		this.y = y;
 		this.orient = orient;
@@ -52,6 +55,13 @@ public class Word {
 	 */
 	public String getString() {
 		return str;
+	}
+	/**
+	 * 日本語訳を返します
+	 * @return
+	 */
+	public String getjaString() {
+		return jastr;
 	}
 	
 	@Override
@@ -98,6 +108,31 @@ public class Word {
 		}
 		return false;
 	}
+	
+	
+	/**
+	 * 単語が壁に当たるかどうか
+	 */
+	public boolean conflictwall(int rows,int columns){
+		int dx=0;
+		int dy=0;
+		switch ( this.getOrient() ) {
+			case RIGHT: dx = 1; break;
+			case DOWN: dy = 1; break;
+		}
+		int x = this.getX();
+		int y = this.getY();
+		for(int i=0; i<this.getLength(); i++){
+			x += dx; y += dy;
+		}
+		if(x>columns || y>rows){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 	
 	/**
 	 * 文字の長さを取得する

@@ -1,8 +1,10 @@
 package ttb;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.TextField;
@@ -15,7 +17,6 @@ import org.newdawn.slick.state.BasicGameState;
  * @author Kohara
  */
 public class GameStatePlayMatch extends BasicGameState {
-	
 	/** ステートID */
 	private int stateID;
 	/** 動作確認用のテキストフィールド */
@@ -32,7 +33,8 @@ public class GameStatePlayMatch extends BasicGameState {
 	protected Network network;
 	/** GUI */
 	protected GuiPlayMatch gui;
-
+	
+	protected Image colc;
 	public GameStatePlayMatch(int stateID) {
 		this.stateID = stateID;
 	}
@@ -49,7 +51,7 @@ public class GameStatePlayMatch extends BasicGameState {
 			Font font = new TrueTypeFont(awtFont, true);
 
 			// テキスト表示領域の用意
-			textField = new TextField(container, font, 10, 10, 100, 100);
+			textField = new TextField(container, font, 285, 545, 420, 30);
 			textField.setFocus(false);
 		}
 		
@@ -72,6 +74,8 @@ public class GameStatePlayMatch extends BasicGameState {
 		// GUIの用意
 		gui = new GuiPlayMatch(new Unit[] { player, opponent });
 		
+		colc = new Image("data/colc.jpg");
+		
 		// ゲームスタート
 		logic.start();
 	}
@@ -79,8 +83,14 @@ public class GameStatePlayMatch extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
+		//背景
+		colc.draw();
 		gui.render(container, g);
+		//テキスト
+		g.setColor(Color.black);
 		textField.render(container, g);
+		//対戦表の表示
+		logic.render(container, g);
 	}
 
 	@Override
