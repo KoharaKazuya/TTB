@@ -4,6 +4,12 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class WordList {
+	
+	// シングルトンパターン
+	private static WordList instance = new WordList();
+	private WordList() {}
+	public static WordList getInstance() { return instance; }
+	
 	/*文字一つ一つのテクスチャ*/
 	public Image word_data;
 	public Image dark_word_data;

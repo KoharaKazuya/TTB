@@ -1,18 +1,11 @@
 package ttb;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.gui.GUIContext;
-
-
 /**
  * 対戦中のルールを定めます。
  * 
  * @author Kohara
  */
 public class LogicPlayMatch extends Logic {
-	//スコア。gui的に作るために用意
-	int intscore = 0;
 	
 	protected Unit[] players;
 	
@@ -36,27 +29,6 @@ public class LogicPlayMatch extends Logic {
 		int winner = whoIsWinner();
 		if ( winner != -1 ) {
 			finish(winner);
-		}
-	}
-	
-	/**
-	 * ゲーム表の描写
-	 * @param container
-	 * @param g
-	 */
-	public void render(GUIContext container, Graphics g) {
-		for ( Unit p : players ) {
-			try {
-				p.stringdisplay(container, g);
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//得点の表示
-			int nowscore = p.getScore();
-			if(intscore<nowscore) intscore++;
-			String score = String.valueOf(intscore);
-			g.drawString(score, 95, 530);
 		}
 	}
 	
