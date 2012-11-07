@@ -22,8 +22,6 @@ public abstract class Unit implements InputListener{
 	protected String currentText = "";
 	/** 自フィールドの表オブジェクト */
 	protected Table table;
-	/**単語リストのクラスの生成？*/
-	WordList wo = new WordList();
 	//表の縦の長さ
 	public final static int rows=18;
 	//表の横の長さ
@@ -71,7 +69,7 @@ public abstract class Unit implements InputListener{
 			// tableのxyとwordのxyが逆になってると思う。
 			table = new Table(rows, columns);
 			/*画像読み込み*/
-			wo.getworddata();
+			WordList wo = WordList.getInstance();
 
 			int len = wo.stringArray.length;
 			int x, y, r;
@@ -122,6 +120,7 @@ public abstract class Unit implements InputListener{
 	 */
 	public void stringdisplay(GUIContext container, Graphics g) throws SlickException {
 		char str = 0;
+		WordList wo = WordList.getInstance();
 		g.setColor(Color.black);
 		for ( int row=0; row<table.rows; ++row ) {
 			for ( int col=0; col<table.columns; ++col ) {
