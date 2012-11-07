@@ -34,7 +34,6 @@ public class GameStatePlayMatch extends BasicGameState {
 	/** GUI */
 	protected GuiPlayMatch gui;
 	
-	protected Image colc;
 	public GameStatePlayMatch(int stateID) {
 		this.stateID = stateID;
 	}
@@ -74,8 +73,6 @@ public class GameStatePlayMatch extends BasicGameState {
 		// GUIの用意
 		gui = new GuiPlayMatch(new Unit[] { player, opponent });
 		
-		colc = new Image("data/colc.jpg");
-		
 		// ゲームスタート
 		logic.start();
 	}
@@ -83,8 +80,6 @@ public class GameStatePlayMatch extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
-		//背景
-		colc.draw();
 		gui.render(container, g);
 		//テキスト
 		g.setColor(Color.black);

@@ -2,6 +2,8 @@ package ttb;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.GUIContext;
 
 /**
@@ -13,18 +15,21 @@ public class GuiPlayMatch extends Gui {
 	
 	/** ゲームに参加しているプレイヤー */
 	private Unit[] players;
+	/** 背景画像 */
+	private Image backgroundImage;
 	/** 現在表示中のスコアの数字 */
 	int intscore = 0;
 	
-	public GuiPlayMatch(Unit[] players) {
+	public GuiPlayMatch(Unit[] players) throws SlickException {
 		this.players = players;
+		backgroundImage = new Image("data/colc.jpg");
 		// WordList 内の画像データを初期化（ロード）
 		WordList.getInstance().getworddata();
 	}
 
 	@Override
 	public void render(GUIContext container, Graphics g) {
-		// TODO Auto-generated method stub
+		backgroundImage.draw();
 		//部分分け
 		g.setColor(new Color(0.94f,0.8f,0.7f,0.8f));
 		g.fillRoundRect(210,85,565,505,10);
