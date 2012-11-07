@@ -65,9 +65,11 @@ public class GuiPlayMatch extends Gui {
 			}
 		}
 		//‘Å‚¿‚ñ‚¾’PŒê‚Ì•\¦
-		g.drawString(table.en,70,400);
-		//“ú–{Œê‘Î‰‹‚Ş
-		//g.drawString("table.ja",100,450);
+		Word word = table.getLastObtainedWord();
+		if ( word != null ) {
+			g.drawString(word.getString(),70,400);
+//			g.drawString(word.getjaString(),100,450);
+		}
 	}
 	
 	/**

@@ -18,9 +18,6 @@ public class Table {
 	protected ArrayList<Word> wordList;
 	/** 獲得済みの単語リスト */
 	protected ArrayList<Word> obtainedList;
-	//成功したときの単語の表示
-	public String en="";
-	public String ja="";
 	
 	public Table(int rows, int columns) {
 		this.rows = rows;
@@ -144,6 +141,19 @@ public class Table {
 			}
 		}
 		return table;
+	}
+	
+	/**
+	 * 最後に獲得した単語を返します。
+	 * ひとつも獲得していない場合は null を返します。
+	 * @return Word or null
+	 */
+	public Word getLastObtainedWord() {
+		if ( obtainedList.isEmpty() ) {
+			return null;
+		} else {
+			return obtainedList.get(obtainedList.size()-1);
+		}
 	}
 
 	@Override
