@@ -1,7 +1,6 @@
 package ttb;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.GUIContext;
 
 
@@ -46,12 +45,6 @@ public class LogicPlayMatch extends Logic {
 	 */
 	public void render(GUIContext container, Graphics g) {
 		for ( Unit p : players ) {
-			try {
-				p.stringdisplay(container, g);
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			//“¾“_‚Ì•\Ž¦
 			int nowscore = p.getScore();
 			if(intscore<nowscore) intscore++;

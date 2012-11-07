@@ -3,25 +3,18 @@ package ttb;
 
 import java.util.Random;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.gui.GUIContext;
-import org.newdawn.slick.state.StateBasedGame;
-
 /**
  * プレイヤーの抽象クラス。
  * 
  * @author Kohara
  */
-public abstract class Unit implements InputListener{
+public abstract class Unit implements InputListener {
 	
 	/** 現在入力中の文字列 */
 	protected String currentText = "";
 	/** 自フィールドの表オブジェクト */
 	protected Table table;
+	public Table getTable() { return table; }
 	//表の縦の長さ
 	public final static int rows=18;
 	//表の横の長さ
@@ -112,34 +105,5 @@ public abstract class Unit implements InputListener{
 			addScore(s.length());
 			System.out.println("you got '" + s + "'!");
 		}
-	}
-
-
-	/**
-	 * 表を返す
-	 */
-	public void stringdisplay(GUIContext container, Graphics g) throws SlickException {
-		char str = 0;
-		WordList wo = WordList.getInstance();
-		g.setColor(Color.black);
-		for ( int row=0; row<table.rows; ++row ) {
-			for ( int col=0; col<table.columns; ++col ) {
-				str = table.getLetters()[row*table.columns + col];
-				String word = String.valueOf(str);
-				if(!table.getIsObtainedTable()[row*table.columns + col]){
-					wo.word_data.draw(230+col*24,99+row*24, 0.76f);
-				}
-				else{
-					wo.dark_word_data.draw(230+col*24,99+row*24, 0.76f);
-				}
-				if(!word.equals("1")){
-					g.drawString(word, 235+col*24,101+row*24);
-				}
-			}
-		}
-		//打ち込んだ単語の表示
-		g.drawString(table.en,70,400);
-		//日本語対応求む
-		//g.drawString("table.ja",100,450);
 	}
 }
