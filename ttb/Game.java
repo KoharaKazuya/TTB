@@ -35,7 +35,7 @@ public class Game extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-//		this.getState(PLAY_MATCH_STATE_ID).init(container, this);
+		this.getState(PLAY_MATCH_STATE_ID).init(container, this);
 	}
 
 }
