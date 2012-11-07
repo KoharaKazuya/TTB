@@ -22,21 +22,16 @@ public abstract class Unit implements InputListener {
 
 	public String[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n",
 								"o","p","q","r","s","t","u","v","w","x","y","z"};
-	public int score=0;
+
 	/**
 	 * 得点を取得します。
 	 */
 	public int getScore() {
-		//よくわからなかったので自分で変更してみた
-//		return -table.getNumOfObtainableWords();
-		return score;
-	}
-	/**
-	 * 得点の加算
-	 * @param add
-	 */
-	public void addScore(int add){
-		score += add*10;
+		if ( table == null ) {
+			return 0;
+		} else {
+			return 600 - 10*table.getNumOfObtainableWords();
+		}
 	}
 	
 	/**
@@ -101,8 +96,6 @@ public abstract class Unit implements InputListener {
 	@Override
 	public void stringInputed(String s) {
 		if ( table.obtainWord(s) ) {
-//			System.out.println(table);
-			addScore(s.length());
 			System.out.println("you got '" + s + "'!");
 		}
 	}
