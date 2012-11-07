@@ -28,13 +28,9 @@ public class Table {
 	}
 	
 	/**
-	 * 単語の上書き
+	 * 単語の上書き（対戦中に呼ばれる）
 	 */
 	public void addWord(Word word) {
-		//壁とぶつかったら無効
-		if(word.conflictwall(rows, columns)){
-			return;
-		}
 		// 獲得済み単語と競合するなら無効
 		for ( Word w : obtainedList ) {
 			if ( w.conflictWith(word) ) {
@@ -42,29 +38,29 @@ public class Table {
 			}
 		}
 		// 獲得可能単語と競合するなら上書き
-		// 無効にした方がうまくいった。修正すれば上書きでいけるかもしれないけど・・?????
 		for ( Word w : wordList ) {
 			if ( w.conflictWith(word) ) {
-				//wordList.remove(w);
-				return;
-			}
-		}
-		//既に同じ単語が登録されていたら無効
-		for(Word w : wordList){
-			if (w.getString().equals(word.getString())){
-				return;
+				wordList.remove(w);
 			}
 		}
 		rewriteLetters(word);
 		wordList.add(word);
-		//確認用
-//		System.out.println(word.getString());
 	}
 	
 	/**
 	 * 獲得可能な単語の追加
 	 */
 	public void addObtainableWord(Word word) {
+		//壁とぶつかったら無効
+		if(word.conflictwall(rows, columns)){
+			return;
+		}
+		// 獲得可能単語と競合するなら無効
+		for ( Word w : wordList ) {
+			if ( w.conflictWith(word) ) {
+				return;
+			}
+		}
 		addWord(word);
 	}
 	
