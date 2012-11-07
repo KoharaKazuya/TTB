@@ -89,8 +89,6 @@ public class GameStatePlayMatch extends BasicGameState {
 		//テキスト
 		g.setColor(Color.black);
 		textField.render(container, g);
-		//対戦表の表示
-		logic.render(container, g);
 	}
 
 	@Override

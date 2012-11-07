@@ -13,6 +13,8 @@ public class GuiPlayMatch extends Gui {
 	
 	/** ゲームに参加しているプレイヤー */
 	private Unit[] players;
+	/** 現在表示中のスコアの数字 */
+	int intscore = 0;
 	
 	public GuiPlayMatch(Unit[] players) {
 		this.players = players;
@@ -31,8 +33,8 @@ public class GuiPlayMatch extends Gui {
 		//スコア用の枠
 		g.fillRoundRect(35,505,130,70,10);
 		renderTable(container, g);
+		renderScore(container, g);
 	}
-
 
 	/**
 	 * 表を描画
@@ -61,6 +63,19 @@ public class GuiPlayMatch extends Gui {
 		g.drawString(table.en,70,400);
 		//日本語対応求む
 		//g.drawString("table.ja",100,450);
+	}
+	
+	/**
+	 * 得点を描画
+	 */
+	protected void renderScore(GUIContext container, Graphics g) {
+		for ( Unit p : players ) {
+			//得点の表示
+			int nowscore = p.getScore();
+			if(intscore<nowscore) intscore++;
+			String score = String.valueOf(intscore);
+			g.drawString(score, 95, 530);
+		}
 	}
 
 }
