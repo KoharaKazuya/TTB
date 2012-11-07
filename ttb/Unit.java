@@ -127,7 +127,7 @@ public abstract class Unit implements InputListener{
 			for ( int col=0; col<table.columns; ++col ) {
 				str = table.getLetters()[row*table.columns + col];
 				String word = String.valueOf(str);
-				if(table.typedletters[row*table.columns + col]==0){
+				if(!table.getIsObtainedTable()[row*table.columns + col]){
 					wo.word_data.draw(230+col*24,99+row*24, 0.76f);
 				}
 				else{

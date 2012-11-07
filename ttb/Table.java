@@ -12,8 +12,6 @@ public class Table {
 	
 	/** 各文字を配列に格納して、文字の位置を管理 */
 	protected char[] letters;
-	/**獲得済みの表のための配列を用意*/
-	protected int[] typedletters;
 	/** 単語フィールドの大きさ */
 	protected int rows, columns;
 	/** 獲得可能な単語のリスト */
@@ -28,14 +26,6 @@ public class Table {
 		this.rows = rows;
 		this.columns = columns;
 		letters = new char[rows*columns];
-		typedletters = new int[rows*columns];
-		//すべての中身を１にしておく
-		for ( int row=0; row<rows; ++row ) {
-			for ( int col=0; col<columns; ++col ) {
-				letters[row*columns + col] = '1';
-				typedletters[row*columns + col] = 0;
-			}
-		}
 		wordList = new ArrayList<Word>();
 		obtainedList = new ArrayList<Word>();
 	}
@@ -93,21 +83,6 @@ public class Table {
 			if ( w.getString().equals(wordStr) ) {
 				ret = true;
 				obtainedList.add(w);
-				/*獲得済み表作成・追記*/
-				int dx=0;
-				int dy=0;
-				switch ( w.getOrient() ) {
-					case RIGHT: dx = 1; break;
-					case DOWN: dy = 1; break;
-				}
-				int x = w.getX();
-				int y = w.getY();
-				for(int i=0; i<w.getLength(); i++){
-					typedletters[x+y*columns] = 1;
-					x += dx; y += dy;
-				}
-				en = w.getString();
-				ja = w.getjaString();
 				ite.remove();
 			}
 		}
@@ -146,6 +121,29 @@ public class Table {
 	 */
 	public char[] getLetters() {
 		return letters;
+	}
+	
+	/**
+	 * 表のマス目がそれぞれ獲得済みかどうかを一次元配列にして返します。
+	 * 並びは左上から横に。
+	 */
+	public boolean[] getIsObtainedTable() {
+		boolean[] table = new boolean[rows*columns];
+		for ( Word w : obtainedList ) {
+			int x = w.getX();
+			int y = w.getY();
+			int dx = 0;
+			int dy = 0;
+			switch ( w.getOrient() ) {
+			case RIGHT: dx = 1; break;
+			case DOWN: dy = 1; break;
+			}
+			for ( int i=0; i<w.getLength(); ++i ) {
+				table[x+columns*y] = true;
+				x += dx; y+= dy;
+			}
+		}
+		return table;
 	}
 
 	@Override
