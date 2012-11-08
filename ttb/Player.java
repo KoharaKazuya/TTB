@@ -1,5 +1,7 @@
 package ttb;
 
+import java.nio.channels.DatagramChannel;
+
 
 /**
  * 自プレイヤーのクラス。
@@ -8,4 +10,10 @@ package ttb;
  */
 public class Player extends Unit {
 
+	/** プレイヤーの入力を相手プレイヤーに送信するチャネル */
+	private DatagramChannel channel;
+	
+	public Player(DatagramChannel channel) {
+		this.channel = channel;
+	}
 }

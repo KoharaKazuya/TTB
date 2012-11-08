@@ -1,5 +1,9 @@
 package ttb;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.channels.DatagramChannel;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
@@ -55,7 +59,12 @@ public class GameStatePlayMatch extends BasicGameState {
 		}
 		
 		// プレイヤーの準備
-		player = new Player();
+		try {
+			player = new Player(getChannel());
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
 		opponent = new Opponent();
 		
 		// ゲームロジックの用意
@@ -96,6 +105,16 @@ public class GameStatePlayMatch extends BasicGameState {
 	@Override
 	public int getID() {
 		return stateID;
+	}
+	
+	/**
+	 * 対戦相手に自分の入力を送信するチャンネルの作成
+	 * これは別のステートでチャンネルを確立しなければならないが、テスト用
+	 */
+	private DatagramChannel getChannel() throws IOException {
+		DatagramChannel channel = DatagramChannel.open();
+		channel.connect(new InetSocketAddress("localhost", 9000));
+		return channel;
 	}
 
 }
