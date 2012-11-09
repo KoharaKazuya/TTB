@@ -5,6 +5,8 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
+import static ttb.NetworkStatics.*;
+
 /**
  * 対戦中の入力を相手プレイヤーに送るクラス
  * InputSender が InputNetwork に対してパケットを送る
@@ -13,12 +15,6 @@ import java.nio.channels.DatagramChannel;
  * @see InputNetwork
  */
 public class InputSender implements InputListener {
-	
-	/** パケットの入出力時に生成するバッファのサイズ */
-	private static final int BUFFER_SIZE = 50;
-	/** パケットの種類 */
-	private static final char TYPE_TEXT_CHANGED = 1;
-	private static final char TYPE_STRING_INPUTED = 2;
 	
 	/** プレイヤーの入力を相手プレイヤーに送信するチャネル */
 	private DatagramChannel channel;
@@ -58,7 +54,10 @@ public class InputSender implements InputListener {
 	 */
 	private void sendStringPacket(char type, String str) {
 		ByteBuffer buf = ByteBuffer.allocate(BUFFER_SIZE);
-		buf.put(str.getBytes());
+		byte[] strBuf = str.getBytes();
+		buf.putChar(type);
+		buf.putInt(strBuf.length);
+		buf.put(strBuf);
 		try {
 			channel.write(buf);
 		} catch ( IOException e ) {

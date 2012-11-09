@@ -30,8 +30,10 @@ public class GameStatePlayMatch extends BasicGameState {
 	protected Opponent opponent;
 	/** ゲームロジックオブジェクト */
 	protected LogicPlayMatch logic;
-	/** ネットワーク管理オブジェクト */
-	protected InputNetwork network;
+	/** ネットワーク経由の入力オブジェクト */
+	protected InputNetwork receiver;
+	/** ネットワーク経由の送信オブジェクト */
+	protected InputSender sender;
 	/** GUI */
 	protected GuiPlayMatch gui;
 	
@@ -61,23 +63,32 @@ public class GameStatePlayMatch extends BasicGameState {
 		
 		// ゲームロジックの用意
 		logic = new LogicPlayMatch(player, opponent);
-		
-		// ネットワーク管理オブジェクトの用意
-		network = new InputNetwork();
-		network.addInputListener(opponent);
 
 		// 入力処理の用意
-		InputSender sender = null;
+		
+		// ネットワーク管理オブジェクトの用意
+		try {
+			receiver = new InputNetwork();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+
+		// ネットワーク経由の送信オブジェクト用意
 		try {
 			sender = new InputSender();
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(-1);
 		}
+		
+		// リスナーの登録
 		input = new InputWord();
 		container.getInput().addKeyListener(input);
 		input.addInputListener(player);
 		input.addInputListener(sender);
+		receiver.addInputListener(opponent);
+		startReceiver(receiver);
 		
 		// GUIの用意
 		gui = new GuiPlayMatch(new Unit[] { player, opponent });
@@ -105,6 +116,20 @@ public class GameStatePlayMatch extends BasicGameState {
 	@Override
 	public int getID() {
 		return stateID;
+	}
+	
+	/**
+	 * パケット受信を監視するスレッドを作成する
+	 */
+	private void startReceiver(final InputNetwork receiver) {
+		(new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while ( true ) {
+					receiver.update();
+				}
+			}
+		})).start();
 	}
 
 }
