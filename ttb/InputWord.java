@@ -9,25 +9,13 @@ import org.newdawn.slick.KeyListener;
  * 
  * @author Kohara
  */
-public class InputWord implements KeyListener {
+public class InputWord extends InputMethod implements KeyListener {
 	
 	/** アルファベット判定用文字列 */
 	protected final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 	
-	/** 入力中の文字列 */
-	protected String text;
-	/** 入力の変化を受け取るリスナー（PlayerClientクラスが入る） */
-	protected InputListener listener;
-	
 	public InputWord() {
 		text = "";
-	}
-	
-	/**
-	 * @return String 現在入力中の文字列
-	 */
-	public String getText() {
-		return text;
 	}
 
 	@Override
@@ -84,30 +72,6 @@ public class InputWord implements KeyListener {
 	
 	@Override
 	public void keyReleased(int key, char c) {
-	}
-	
-	/**
-	 * 入力のリスナーの登録
-	 */
-	public void setInputListener(InputListener listener) {
-		this.listener = listener;
-	}
-
-	/**
-	 * 入力中の文字列の変更はここで行う。
-	 * @param newText 新しいテキスト
-	 */
-	protected void changeText(String newText) {
-		text = newText;
-		listener.textChanged(text);
-	}
-	
-	/**
-	 * 文字列の確定はここで行う。
-	 * @param text 確定した文字列
-	 */
-	protected void inputString(String text) {
-		listener.stringInputed(text);
 	}
 
 }

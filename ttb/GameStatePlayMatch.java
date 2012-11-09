@@ -1,10 +1,11 @@
 package ttb;
 
+import java.io.IOException;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.TextField;
@@ -29,8 +30,10 @@ public class GameStatePlayMatch extends BasicGameState {
 	protected Opponent opponent;
 	/** ゲームロジックオブジェクト */
 	protected LogicPlayMatch logic;
-	/** ネットワーク管理オブジェクト */
-	protected Network network;
+	/** ネットワーク経由の入力オブジェクト */
+	protected InputNetwork receiver;
+	/** ネットワーク経由の送信オブジェクト */
+	protected InputSender sender;
 	/** GUI */
 	protected GuiPlayMatch gui;
 	
@@ -60,15 +63,32 @@ public class GameStatePlayMatch extends BasicGameState {
 		
 		// ゲームロジックの用意
 		logic = new LogicPlayMatch(player, opponent);
-		
-		// ネットワーク管理オブジェクトの用意
-		network = new Network();
-		network.addInputListener(opponent);
 
 		// 入力処理の用意
+		
+		// ネットワーク管理オブジェクトの用意
+		try {
+			receiver = new InputNetwork();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+
+		// ネットワーク経由の送信オブジェクト用意
+		try {
+			sender = new InputSender();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		
+		// リスナーの登録
 		input = new InputWord();
 		container.getInput().addKeyListener(input);
-		input.setInputListener(player);
+		input.addInputListener(player);
+		input.addInputListener(sender);
+		receiver.addInputListener(opponent);
+		startReceiver(receiver);
 		
 		// GUIの用意
 		gui = new GuiPlayMatch(new Unit[] { player, opponent });
@@ -96,6 +116,20 @@ public class GameStatePlayMatch extends BasicGameState {
 	@Override
 	public int getID() {
 		return stateID;
+	}
+	
+	/**
+	 * パケット受信を監視するスレッドを作成する
+	 */
+	private void startReceiver(final InputNetwork receiver) {
+		(new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while ( true ) {
+					receiver.update();
+				}
+			}
+		})).start();
 	}
 
 }
