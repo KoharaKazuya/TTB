@@ -13,4 +13,16 @@ public class Player extends Unit {
 	public Player(InputSender sender) {
 		this.sender = sender;
 	}
+
+	@Override
+	public void textChanged(String text) {
+		super.textChanged(text);
+		sender.sendTextChanged(text);
+	}
+
+	@Override
+	public void stringInputed(String s) {
+		super.stringInputed(s);
+		sender.sendStringInputed(s);
+	}
 }
