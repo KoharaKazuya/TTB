@@ -56,12 +56,7 @@ public class GameStatePlayMatch extends BasicGameState {
 		}
 		
 		// プレイヤーの準備
-		try {
-			player = new Player(new InputSender());
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
+		player = new Player();
 		opponent = new Opponent();
 		
 		// ゲームロジックの用意
@@ -69,12 +64,20 @@ public class GameStatePlayMatch extends BasicGameState {
 		
 		// ネットワーク管理オブジェクトの用意
 		network = new InputNetwork();
-		network.setInputListener(opponent);
+		network.addInputListener(opponent);
 
 		// 入力処理の用意
+		InputSender sender = null;
+		try {
+			sender = new InputSender();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
 		input = new InputWord();
 		container.getInput().addKeyListener(input);
-		input.setInputListener(player);
+		input.addInputListener(player);
+		input.addInputListener(sender);
 		
 		// GUIの用意
 		gui = new GuiPlayMatch(new Unit[] { player, opponent });

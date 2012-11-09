@@ -8,11 +8,15 @@ package ttb;
 public class InputNetwork extends InputMethod {
 	
 	private void receivePacketTextChanged(String text) {
-		listener.textChanged(text);
+		for ( InputListener listener : listeners ) {
+			listener.textChanged(text);
+		}
 	}
 	
 	private void receivePacketStringInputed(String text) {
-		listener.stringInputed(text);
+		for ( InputListener listener : listeners ) {
+			listener.stringInputed(text);
+		}
 	}
 
 }

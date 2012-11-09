@@ -6,23 +6,5 @@ package ttb;
  * @author Kohara
  */
 public class Player extends Unit {
-
-	/** “ü—Í‚ğ‘Îí‘Šè‚É“`‚¦‚é */
-	private InputSender sender;
 	
-	public Player(InputSender sender) {
-		this.sender = sender;
-	}
-
-	@Override
-	public void textChanged(String text) {
-		super.textChanged(text);
-		sender.sendTextChanged(text);
-	}
-
-	@Override
-	public void stringInputed(String s) {
-		super.stringInputed(s);
-		sender.sendStringInputed(s);
-	}
 }

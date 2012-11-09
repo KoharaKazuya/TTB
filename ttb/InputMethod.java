@@ -1,5 +1,7 @@
 package ttb;
 
+import java.util.ArrayList;
+
 /**
  * キーボードやネットワーク経由などの入力方法の抽象クラス
  * 
@@ -8,7 +10,7 @@ package ttb;
 public abstract class InputMethod {
 	
 	/** 入力の変化を受け取るリスナー  */
-	protected InputListener listener;
+	protected ArrayList<InputListener> listeners = new ArrayList<InputListener>();
 	
 	/** 入力中の文字列 */
 	protected String text;
@@ -23,8 +25,8 @@ public abstract class InputMethod {
 	/**
 	 * 入力のリスナーの登録
 	 */
-	public void setInputListener(InputListener listener) {
-		this.listener = listener;
+	public void addInputListener(InputListener listener) {
+		listeners.add(listener);
 	}
 
 	/**
@@ -33,7 +35,9 @@ public abstract class InputMethod {
 	 */
 	protected void changeText(String newText) {
 		text = newText;
-		listener.textChanged(text);
+		for ( InputListener listener : listeners ) {
+			listener.textChanged(text);
+		}
 	}
 	
 	/**
@@ -41,7 +45,9 @@ public abstract class InputMethod {
 	 * @param text 確定した文字列
 	 */
 	protected void inputString(String text) {
-		listener.stringInputed(text);
+		for ( InputListener listener : listeners ) {
+			listener.stringInputed(text);
+		}
 	}
 
 }

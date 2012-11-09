@@ -12,7 +12,7 @@ import java.nio.channels.DatagramChannel;
  * @author Kohara
  * @see InputNetwork
  */
-public class InputSender {
+public class InputSender implements InputListener {
 	
 	/** パケットの入出力時に生成するバッファのサイズ */
 	private static final int BUFFER_SIZE = 50;
@@ -37,17 +37,19 @@ public class InputSender {
 		return channel;
 	}
 	
+	@Override
 	/**
 	 * 入力中文字列が変更されたことを伝える
 	 */
-	public void sendTextChanged(String text) {
+	public void textChanged(String text) {
 		sendStringPacket(TYPE_TEXT_CHANGED, text);
 	}
 	
+	@Override
 	/**
 	 * 入力文字列が確定したことを伝える
 	 */
-	public void sendStringInputed(String s) {
+	public void stringInputed(String s) {
 		sendStringPacket(TYPE_STRING_INPUTED, s);
 	}
 	
@@ -63,5 +65,4 @@ public class InputSender {
 			e.printStackTrace();
 		}
 	}
-
 }
