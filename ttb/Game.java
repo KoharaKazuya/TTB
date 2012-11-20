@@ -14,13 +14,15 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Game extends StateBasedGame {
 	
 	public static final int PLAY_MATCH_STATE_ID = 0;
+	public static final int TITLE_STATE_ID = 1;
 
 	public Game() {
 		super("Table Typing Battle");
 		
 		addState( new GameStatePlayMatch(PLAY_MATCH_STATE_ID) );
+		addState( new GameStateTitle(TITLE_STATE_ID) );
 		
-		enterState(PLAY_MATCH_STATE_ID);
+		enterState(TITLE_STATE_ID);
 	}
 
 	/**
@@ -36,6 +38,7 @@ public class Game extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		this.getState(PLAY_MATCH_STATE_ID).init(container, this);
+		this.getState(TITLE_STATE_ID).init(container, this);
 	}
 
 }
