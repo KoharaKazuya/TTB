@@ -59,6 +59,16 @@ public class GameStateTitle extends BasicGameState {
 	}
 
 	@Override
+	public void mouseClicked(int button, int x, int y, int clickCount) {
+		super.mouseClicked(button, x, y, clickCount);
+		// TODO : テスト用
+		switch ( button ) {
+		case 0: nextState = STATES.PLAY_MATCH; break;
+		case 1: nextState = STATES.EXIT_GAME; break;
+		}
+	}
+
+	@Override
 	public int getID() {
 		return stateID;
 	}
