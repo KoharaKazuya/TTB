@@ -12,8 +12,16 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Kohara
  */
 public class GameStateTitle extends BasicGameState {
+	
+	/** 次のステート */
+	enum STATES {
+		TITLE, PLAY_MATCH
+	}
+	
 	/** ステートID */
 	private int stateID;
+	/** 次のステート */
+	private STATES nextState = STATES.TITLE;
 	
 	public GameStateTitle(int stateID) {
 		this.stateID = stateID;
@@ -36,8 +44,15 @@ public class GameStateTitle extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
-		// TODO Auto-generated method stub
-
+		switch ( nextState ) {
+		case TITLE:
+			break;
+		case PLAY_MATCH:
+			game.enterState(Game.PLAY_MATCH_STATE_ID);
+			break;
+		default:
+			throw new SlickException("定義されていないステートが次ステートに指定されました。");
+		}
 	}
 
 	@Override
