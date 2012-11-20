@@ -15,7 +15,7 @@ public class GameStateTitle extends BasicGameState {
 	
 	/** 次のステート */
 	enum STATES {
-		TITLE, PLAY_MATCH
+		TITLE, PLAY_MATCH, EXIT_GAME
 	}
 	
 	/** ステートID */
@@ -49,6 +49,9 @@ public class GameStateTitle extends BasicGameState {
 			break;
 		case PLAY_MATCH:
 			game.enterState(Game.PLAY_MATCH_STATE_ID);
+			break;
+		case EXIT_GAME:
+			container.exit();
 			break;
 		default:
 			throw new SlickException("定義されていないステートが次ステートに指定されました。");
